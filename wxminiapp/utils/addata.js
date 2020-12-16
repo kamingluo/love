@@ -15,9 +15,6 @@ function randomdata(arr) {
   console.log(array);
 }
 
-//获得到n的随机数
-// var rand = Math.floor(Math.random() * (n)) + 1;
-
 
 //从数组随机取一个值
 function haveone(arr) {
@@ -35,7 +32,6 @@ function havemobansome() {
     let j = Math.floor(Math.random() * (i + 1));
     [array[i], array[j]] = [array[j], array[i]];
   }
-  // console.log(array);
   return array;
 }
 
@@ -69,16 +65,8 @@ function havebannersome() {
     shuffled[index] = shuffled[i];
     shuffled[i] = temp;
   }
-  //console.log(shuffled.slice(min)) 
   return shuffled.slice(min)
 }
-
-
-
-
-
-
-
 
 
 module.exports = {

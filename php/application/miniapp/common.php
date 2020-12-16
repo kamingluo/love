@@ -6,17 +6,7 @@
 use think\Log;
 use think\Db;
 use think\Request;
-
 use think\Controller;
-
-
-
-//测试方法
-function test(){
-    return "test";
-
-}
-
 
 /**
    * 调取微信接口获取openid
@@ -27,7 +17,6 @@ function openid($wxcode){
     if($wxcode == 'kaming'){
         $openid='o3XMA0enuFRZsOCOCeqjB70exjr4';
         return $openid;
-
     }
     $url = 'https://api.weixin.qq.com/sns/jscode2session';
     $data['appid']=Config('appid');
@@ -38,7 +27,7 @@ function openid($wxcode){
     $openiddata=json_decode($wxopenid,true);
     $rest=array_key_exists("errcode",$openiddata);//判断返回值存在errcode证明code有误
         if($rest){ 
-             Log::record('code错误或者过期了！传入微信code-->'.$wxcode,'error');
+            Log::record('code错误或者过期了！传入微信code-->'.$wxcode,'error');
             echo  json_encode(['state'   => '400','message'  => "code错误或者过期了！" ] ) ;
             die ();
         }
@@ -50,195 +39,120 @@ function openid($wxcode){
 
 
 
-/**
-   * 增加积分方法
-   * $explain 增加积分说明
-*/
-function increase($openid,$data,$explain){
-    $dbreturn= db('user')->where('openid',$openid)->setInc('score',$data['score']);
-    // return $dbreturn;
-    if($dbreturn == 1){
-        $time =date('Y-m-d H:i:s',time());//获取当前时间
-        $dbdata = ['id'=>'','openid' =>$openid,'score' =>$data['score'],'explain' =>$explain,'channel' =>$data['channel'],'master_id' => $data['master_id'],'state' =>0,'create_time' =>$time];
-        $dbreturn=db('score_record')->insert($dbdata);
-        return 1;
-        }
-        else{
-            return 0;    
-        }
 
-}
-
-/**
-   * 进贡表增加数据
-   * tribute_table
-*/
-function tribute($master_id,$userId,$channel){
-  if($master_id == 0){
-    return ;
-}
+//推送实例
+function msgpushnew($openid,$crowd_name){
+    $senopenid=$openid;//用户openid
+    $access_token=wxtoken();//拿到token
+    $temid = 'fIbB90FHxqlRURZGGo0PmcdAKWaUoxziV_loz90ftVs';
+    $page = 'pages/index/index';
+    $url = 'https://api.weixin.qq.com/cgi-bin/message/subscribe/send?access_token='.$access_token;
+    $explan="群:".$crowd_name."有新消息;";
     $time =date('Y-m-d H:i:s',time());//获取当前时间
-    $record = ['id'=>'','master_id' =>$master_id,'apprenticeid' =>$userId,'pay_tribute' => 0 ,'channel' =>$channel,'reward' =>0,'create_time' =>$time];
-    $data=db('tribute_table')->insert($record);
-    return $data;
+    $data = array(
+      "touser"=>$senopenid,
+      "template_id"=>$temid,
+      "page"=>$page,
+      "miniprogram_state"=>"formal",
+      "lang"=>"zh_CN",
+      "data"=>array(
+          "thing1"=>array(
+              //这里贼坑，字符串过长不能发送成功，但是回调信息没提示
+              "value"=>$explan
+          ),
+          "thing3"=>array(
+              "value"=>"点击查看>>>"
+          ),
+          "time2"=>array(
+              "value"=>$time
+          )
+        )
+      );
+  $res = postCurl($url,$data,'json');
+  if($res){
+     return "发送成功";
+  }else{
+      return "发送失败";
+  }
 
 }
 
 
-/**
-   * 徒弟进贡
-*/
-function contribution($master_id,$openid,$score){
-    if($master_id == 0){
-        return ;
-    }
-    
-    $dbdata=db('user')->where('id',$master_id)->find();//查询师傅信息
-    $score=$score * 0.2;
-     $sql = "UPDATE user SET score =score + :score , tribute = tribute+ :tribute WHERE id = :id;";   //同时加两个字段的金额，thinkphp5方法特别麻烦
-    $affected = Db::execute($sql,['score'=>$score,'tribute'=>$score,'id'=>$master_id]); //给师傅加完金币
-     
-    $apprenticeid =db('user')->where('openid',$openid)->value('id');//拿到徒弟id
-    $tributereturn= db('tribute_table')->where('apprenticeid',$apprenticeid)->setInc('pay_tribute',$score);//更改进贡表数据
-
-    // return        $affected; 
-    $time =date('Y-m-d H:i:s',time());//获取当前时间
-    $record = ['id'=>'','openid' =>$dbdata['openid'],'score' =>$score,'explain' =>"徒弟进贡",'channel' =>$dbdata['channel'],'master_id' => $dbdata['master_id'],'state' =>0,'create_time' =>$time];
-    $dbreturn=db('score_record')->insert($record);
-     if ($affected==1&&$dbreturn==1) {
-         return ['state'   => '200','message'  => "进贡成功" ,'score' => $score] ;
-     }
-     else{
-         return ['state'   => '200','message'  => "进贡失败" ,'score' => $score] ;
-     }
-   
-}
 
 
 
 
-/**
-   * 徒弟完成任务奖励师傅100金币
-*/
-function reward($master_id,$openid){
-    //师傅id为0直接跳出
-    if($master_id == 0){
-        return ;
-    }
-    
-    $apprenticeid =db('user')->where('openid',$openid)->value('id');//拿到徒弟id
 
-    $rewardif=db('tribute_table')->where('apprenticeid',$apprenticeid)->value('reward');//拿到是否奖励过的值，0是没1是有
 
-    if($rewardif == 1){
-        //已经奖励过了
-        return ['state'   => '200','message'  => "已经奖励过了" ] ;
+//文案审核
+function wxmsgSecCheck($content){
+    $access_token=wxtoken();//拿到token
+    $url = 'https://api.weixin.qq.com/wxa/msg_sec_check?access_token='.$access_token;//文案审核URL
+    $data=array("content"=>$content);
+    $respon = newpostCurl($url,$data,'json');
+    $respon = json_decode($respon,true);
+    // Log::record("文案审核内容");
+    // Log::record($content);
+    // Log::record("文案审核结果啊");
+    // Log::record($respon);
+    if($respon['errcode'] == 87014){
+        return 1;//效验失败，内容含有违法违规内容
     }
     else{
-
-    $dbdata=db('user')->where('id',$master_id)->find();//查询师傅信息
-    $score=100; //写死100金币
-
-     $sql = "UPDATE user SET score =score + :score , tribute = tribute+ :tribute WHERE id = :id;";   //同时加两个字段的金额，thinkphp5方法特别麻烦
-    $affected = Db::execute($sql,['score'=>$score,'tribute'=>$score,'id'=>$master_id]); //给师傅加完金币
-     
-    $tributereturn= db('tribute_table')->where('apprenticeid',$apprenticeid)->setInc('pay_tribute',$score);//更改进贡表数据
-    $tributereturn2= db('tribute_table')->where('apprenticeid',$apprenticeid)->update(['reward' => 1]);//更改进贡表数据
-
-    // return        $affected; 
-    $time =date('Y-m-d H:i:s',time());//获取当前时间
-    $record = ['id'=>'','openid' =>$dbdata['openid'],'score' =>$score,'explain' =>"徒弟进贡",'channel' =>$dbdata['channel'],'master_id' => $dbdata['master_id'],'state' =>0,'create_time' =>$time];
-    $dbreturn=db('score_record')->insert($record);
-     if ($affected==1&&$dbreturn==1) {
-         return ['state'   => '200','message'  => "进贡成功" ,'score' => $score] ;
-     }
-     else{
-         return ['state'   => '200','message'  => "进贡失败" ,'score' => $score] ;
-     }
-
+        return 0;
     }
+}
 
-   
+
+//这个请求跟全局公共文件，请求不同是这里的json_encode()处理中文的时候，不转码。
+function newpostCurl($url,$data,$type){
+    if($type == 'json'){
+        $data = json_encode($data,JSON_UNESCAPED_UNICODE);//对数组进行json编码,设置JSON_UNESCAPED_UNICODE是不对中文进行转码。
+        $header= array("Content-type: application/json;charset=UTF-8","Accept: application/json","Cache-Control: no-cache", "Pragma: no-cache");
+    }
+    $curl = curl_init();
+    curl_setopt($curl,CURLOPT_URL,$url);
+    curl_setopt($curl,CURLOPT_POST,1);
+    curl_setopt($curl,CURLOPT_SSL_VERIFYPEER,false);
+    curl_setopt($curl,CURLOPT_SSL_VERIFYHOST,false);
+    if(!empty($data)){
+        curl_setopt($curl,CURLOPT_POSTFIELDS,$data);
+    }
+    curl_setopt($curl,CURLOPT_RETURNTRANSFER,1);
+    curl_setopt($curl,CURLOPT_HTTPHEADER,$header);
+    $res = curl_exec($curl);
+    if(curl_errno($curl)){
+        echo 'Error+'.curl_error($curl);
+    }
+    curl_close($curl);
+    return $res;
+    
 }
 
 
 
-    //淘宝请求生成
-    function taobaorequest($parameters){
-      $app_key=Config('taobao_appkey');
-      $client_secret=Config('taobao_app_secret');
-      $url=Config('taobao_api_url');
-      $nowtime = date('Y-m-d H:i:s');//获取当前时间
-      $originaldata= array(
-          "app_key"=>$app_key,
-          "sign_method"=>"md5",
-          "format"=>"json",
-          "v"=>"2.0",
-          "timestamp"=>$nowtime,
-      );
-       $mergedata=array_merge($originaldata,$parameters); //合并参数
-       ksort($mergedata);// 将参数Key按字典顺序排序
-       // 生成规范化请求字符串
-       //return $mergedata;
-      $canonicalizedQueryString = '';
-      foreach ($mergedata as $k => $v)
-      {
-          if($k != "sign" && $v !== "" && !is_array($v)){ //array数组不参与生成
-              $canonicalizedQueryString .= $k . $v ;
-          }
-      }
-       $str = $client_secret.$canonicalizedQueryString.$client_secret;//前后加上client_secret
-       $encryption= md5($str);//md5加密处理
-       $upper = strtoupper($encryption);//加密之后的转换成大写
-       $sigin= array( 
-          "sign"=>$upper //生成sign参数加入到请求
-       );
-       $newdata=array_merge($mergedata,$sigin);
-       ksort($newdata);//再次排序下
-    
-       $requestUrl = $url."?";
-    
-      foreach ($newdata as $sysParamKey => $sysParamValue)
-    {
-        $requestUrl .= "$sysParamKey=" . urlencode($sysParamValue) . "&";
-      }
-      $requestUrl = substr($requestUrl, 0, -1);
-    
-      $resdata=getcurl($requestUrl);
-      return json_decode($resdata);
+//微信token获取
+function wxtoken(){
+    $dbres =db('wxtoken')->where('id',1)->find();
+    $token_time=$dbres["update_time"];
+    $time =date('Y-m-d H:i:s',time());//获取当前时间
+    $second=floor((strtotime($time)-strtotime($token_time)));//对比两个时间，拿到时间差
+    if($second > 3600){
+        //一小时更新一次,超过一小时再去调一次
+        $data['appid']=Config('appid');
+        $data['secret']= Config('secret');
+        $data['grant_type']= 'client_credential';
+        $api = "https://api.weixin.qq.com/cgi-bin/token";//拿token接口
+        $str = http($api, $data,'GET');
+        $token = json_decode($str,true);
+        $access_token=$token['access_token'];//拿到token
+        //更新一下数据库的access_token和时间
+        $updatedata= db('wxtoken')->where('id',1)->update(['update_time' => $time,'access_token' => $access_token]);
     }
-    
-    
-    //拼多多请求生成
-    function computeSignature($parameters){
-      $client_id=Config('pdd_client_id');
-      $client_secret=Config('pdd_client_secret');
-      $url=Config('pdd_api_url');
-      $nowtime = time();
-      $originaldata= array(
-          "client_id"=>$client_id,
-          "timestamp"=>$nowtime,
-      );
-       $mergedata=array_merge($originaldata,$parameters); //合并参数
-       ksort($mergedata);// 将参数Key按字典顺序排序
-       // 生成规范化请求字符串
-      $canonicalizedQueryString = '';
-      foreach ($mergedata as $k => $v)
-      {
-          if($k != "sign" && $v !== "" && !is_array($v)){ //array数组不参与生成
-              $canonicalizedQueryString .= $k . $v ;
-          }
-      }
-       $str = $client_secret.$canonicalizedQueryString.$client_secret;//前后加上client_secret
-       $encryption= md5($str);//md5加密处理
-       $upper = strtoupper($encryption);//加密之后的转换成大写
-       $sigin= array( 
-          "sign"=>$upper //生成sign参数加入到请求
-       );
-       $newdata=array_merge($mergedata,$sigin);
-       ksort($newdata);//再次排序下
-       $res = postCurl($url,$newdata,'json');//请求接口获得数据
-       $returndata=json_decode($res);//去除转义
-       return $returndata;
+    else{
+        $access_token=$dbres["access_token"];//直接拿到数据库存储的token
     }
-    
+    return $access_token;
+
+}
+

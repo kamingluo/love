@@ -13,20 +13,11 @@ class Currency
     {
       $userid=$request->param("userid");
       $channel=$request->param("channel");
-
       if (is_file('./qrcode/'.$userid.'.png')){
         return ['state'   => '200','message'  => "二维码已经存在" ,'type' => 'success'] ;
       }else{
-        
-        $data['appid']=Config('appid');
-        $data['secret']= Config('secret');
-        $data['grant_type']= 'client_credential';
-        $api = "https://api.weixin.qq.com/cgi-bin/token";//拿token接口
-        $str = http($api, $data,'GET');
-        $token = json_decode($str,true);
-        $access_token=$token['access_token'];//拿到token
-        $url = "https://api.weixin.qq.com/wxa/getwxacode?access_token=$access_token";
-
+        $access_token=wxtoken();//拿到token
+        $url = "https://api.weixin.qq.com/wxa/getwxacode?access_token=$access_token";//生成二维码接口地址
         $data = json_encode(array("path"=>"pages/index/index?master_id=$userid&channel=$channel","width"=> 150));
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_POST, 1);

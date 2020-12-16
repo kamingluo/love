@@ -8,7 +8,6 @@ class Index
 {
     public function index(Request $request)
     {
-
     	return  "所以，爱会消失吗？" ;
     }
 
