@@ -12,7 +12,6 @@ class User
 {
    /** 用户注册未授权 */
 public function register(Request $request){
-    $data = $request->param();//接收所有传过来的post值
     $wxcode =$request->param("code");
     $openid=openid($wxcode);
     $scene=$request->param("scene");
