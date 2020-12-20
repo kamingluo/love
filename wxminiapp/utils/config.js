@@ -1,6 +1,6 @@
 module.exports = {
-  host: 'https://love.gzywudao.top/miniapp.php/', //正式请求域名
-  // host: 'http://127.0.0.1/myproject/love/php/public/miniapp.php/', //本地请求域名
+  //host: 'https://love.gzywudao.top/miniapp.php/', //正式请求域名
+  host: 'http://127.0.0.1/myproject/love/php/public/miniapp.php/', //本地请求域名
   imageurl: 'https://love.gzywudao.top/',//图片地址
   cversion: 1, //版本号
   appid: 'wxc335c3cf09a7a39c', //小程序appid

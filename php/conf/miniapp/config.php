@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'appid'=>'wxc335c3cf09a7a39c',//微信小程序appid
-    'secret'=>'dfbaf09a20c6bd2d1ba86a5051dfa7f5',//微信小程序appscret
+    'appid'=>'wxd53f125c7e4c7d44',//微信小程序appid
+    'secret'=>'07f5c193225590c07c8193fd53e4b2a2',//微信小程序appscret
     'default_filter' => 'htmlspecialchars',
     'pdd_client_id' => '4b5d3ccbce894f4e92bf8998da0853ba',//拼多多群记分应用id
     'pdd_client_secret' => 'dffb105376b725650548f326e70add2d5d01bd0a',//拼多多群记分应用密钥

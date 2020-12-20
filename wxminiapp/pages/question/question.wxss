@@ -38,6 +38,9 @@ page {
   
 }
 
+.list{
+  margin-bottom: 200rpx;
+}
 
 .cu-chat .cu-item {
 	display: flex;
