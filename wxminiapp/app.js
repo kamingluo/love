@@ -1,17 +1,17 @@
 //app.js
 const common = require('./utils/common.js') //公共函数
 const { request } = require('./utils/request.js')//公共请求方法
-const ald = require('./utils/sdk/ald/ald-stat.js') //阿拉丁统计
 App({
   globalData: {
     //一定要，删除报错
   },
   onLaunch: function (e) {
     console.log("onLaunch打印信息", e)
-    this.autoUpdate()//检查更新
+    //this.autoUpdate()//检查更新
     //common.register(e) //用户注册
-    this.scene(e)//传入入口值判断
+    //this.scene(e)//传入入口值判断
     // 获取系统状态栏信息
+    this.seenum()//用户可以查看匿名次数
     wx.getSystemInfo({
       success: e => {
         this.globalData.StatusBar = e.statusBarHeight;
@@ -20,6 +20,24 @@ App({
         this.globalData.CustomBar = custom.bottom + custom.top - e.statusBarHeight;
       }
     })
+  },
+
+
+  //用户可以查看匿名次数
+  seenum:function(){
+        wx.login({
+          success: res => {
+            request({
+              service: 'miniapp.php/seenum/mynum',
+              data: {
+                code: res.code,
+              },
+              success: res => {
+                wx.setStorageSync('seenum', res.number)
+              },
+            })
+          }
+        })
   },
 
 
@@ -38,27 +56,6 @@ App({
     else {
       this.globalData.addapptips = true;
     }
-  },
-
-
-
-  onShow(options) {
-    wx.login({
-      success: function (res) {
-        request({
-          service: 'user/obtainopenid',
-          data: {
-            code: res.code,
-          },
-          success: res => {
-            wx.aldstat.sendOpenid(res.openid) //阿拉丁统计需要
-          },
-          fail: res => {
-            console.log("小程序启动onshow拿到的openid错误信息", res)
-          },
-        })
-      }
-    })
   },
 
 

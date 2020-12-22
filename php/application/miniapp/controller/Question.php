@@ -40,7 +40,11 @@ class Question
             $myquestionlist=[];
         }
         else{
-            $myquestionlist=db('question_answer')->where('answer_userid',$dbdata["id"])->order('id asc')->select();
+            $answer_userid=$dbdata["id"];
+            $sql = "select question_answer.*,user.nickName,user.avatarUrl from question_answer,user where question_answer.question_userid=user.id and question_answer.answer_userid='". $answer_userid."';" ;
+            $myquestionlist = Db::query($sql); //拿到数据
+
+            //$myquestionlist=db('question_answer')->where('answer_userid',$dbdata["id"])->order('id asc')->select();
         }
         $state=['state'   => '200','message'  => "用户查看问自己的问题" ];
         $resdata=array_merge($state,array('myquestionlist'=>$myquestionlist));
@@ -51,6 +55,8 @@ class Question
     public function shareuserquestion(Request $request)
     {
         $answer_userid =$request->param("answer_userid");//回答者id
+        $answer_userdata =db('user')->where('id',$answer_userid)->find();//查询回答者用户信息
+
         $wxcode =$request->param("code");
         $openid=openid($wxcode);//提问者openid
         $dbdata =db('user')->where('openid',$openid)->find();//查询用户信息
@@ -58,11 +64,14 @@ class Question
             $questionlist=[];
         }
         else{
-            $questionlist=db('question_answer')->where('answer_userid',$answer_userid)->where('question_userid',$dbdata["id"])->order('id asc')->select();
+            // $question_userid=$dbdata["id"];
+            // $sql = "select question_answer.*,user.nickName,user.avatarUrl from question_answer,user where question_answer.question_userid=user.id and question_answer.answer_userid='". $answer_userid."';" ;
+            // $myquestionlist = Db::query($sql); //拿到数据
 
+            $questionlist=db('question_answer')->where('answer_userid',$answer_userid)->where('question_userid',$dbdata["id"])->order('id asc')->select();
         }
         $state=['state'   => '200','message'  => "被分享用户进来，查看已经问分享者的问题" ];
-        $resdata=array_merge($state,array('questionlist'=>$questionlist));
+        $resdata=array_merge($state,array('questionlist'=>$questionlist),array('answeruserdata'=>$answer_userdata));
         return $resdata ;
     }
 

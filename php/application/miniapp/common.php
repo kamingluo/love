@@ -44,14 +44,14 @@ function openid($wxcode){
 
 
 
-//推送实例
-function msgpushnew($openid,$crowd_name){
+//提问待解答提醒
+function questions($openid){
     $senopenid=$openid;//用户openid
     $access_token=wxtoken();//拿到token
-    $temid = 'fIbB90FHxqlRURZGGo0PmcdAKWaUoxziV_loz90ftVs';
-    $page = 'pages/index/index';
+    $temid = 'c6g3UgZ75NNEmb7A97wfUY9hUpL9-8UkovWrZib__0o';
+    $page = 'pages/index/index';//路径
     $url = 'https://api.weixin.qq.com/cgi-bin/message/subscribe/send?access_token='.$access_token;
-    $explan="群:".$crowd_name."有新消息;";
+    //$explan="群:".$crowd_name."有新消息;";
     $time =date('Y-m-d H:i:s',time());//获取当前时间
     $data = array(
       "touser"=>$senopenid,
@@ -62,14 +62,54 @@ function msgpushnew($openid,$crowd_name){
       "data"=>array(
           "thing1"=>array(
               //这里贼坑，字符串过长不能发送成功，但是回调信息没提示
-              "value"=>$explan
+              "value"=>"点击进入小程序查看提问内容"
           ),
-          "thing3"=>array(
-              "value"=>"点击查看>>>"
+          "thing2"=>array(
+              "value"=>"暂未回答"
           ),
-          "time2"=>array(
+          "time3"=>array(
               "value"=>$time
           )
+        )
+      );
+  $res = postCurl($url,$data,'json');
+  if($res){
+     return "发送成功";
+  }else{
+      return "发送失败";
+  }
+
+}
+
+
+
+//问题被回复通知
+function reply($openid){
+    $senopenid=$openid;//用户openid
+    $access_token=wxtoken();//拿到token
+    $temid = 'lgKPuU_5nhhwESBve42PiBJrgYEoUbb83Y8K7rU9oSk';
+    $page = 'pages/index/index';//路径
+    $url = 'https://api.weixin.qq.com/cgi-bin/message/subscribe/send?access_token='.$access_token;
+    $time =date('Y-m-d H:i:s',time());//获取当前时间
+    $data = array(
+      "touser"=>$senopenid,
+      "template_id"=>$temid,
+      "page"=>$page,
+      "miniprogram_state"=>"formal",
+      "lang"=>"zh_CN",
+      "data"=>array(
+          "name3"=>array(
+              "value"=>"你的好友"//回答人
+          ),
+          "thing4"=>array(
+              "value"=>"点击进入小程序查看回答内容"//回答内容
+          ),
+          "time6"=>array(
+              "value"=>$time//时间
+          ),
+          "thing5"=>array(
+            "value"=>"你的问题有新的回复，请前往小程序查看具体内容~"//温馨提示
+        )
         )
       );
   $res = postCurl($url,$data,'json');
