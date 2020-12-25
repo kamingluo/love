@@ -18,7 +18,8 @@ Page({
     this.setData({
       answer_userid: answer_userid
     })
-    this.shareuserquestion()
+    this.shareuserquestion()//被分享用户进来，查看已经问分享者的问题
+    this.questionlist()//预设问题列表
   },
 
   

@@ -1,7 +1,7 @@
 /**
  * 封装http 请求方法
  */
-const apiUrl = "https://littlefun.gzywudao.top/php/public/miniapp.php/"; //服务器api地址
+const apiUrl = "https://love.gzywudao.top/miniapp.php/"; //服务器api地址
 const http = (params) => {
   //返回promise 对象
   return new Promise((resolve, reject) => {

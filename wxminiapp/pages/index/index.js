@@ -3,23 +3,28 @@ const {
   request
 } = require('./../../utils/request.js');
 const common = require('./../../utils/common.js') //公共函数
-const addata = require('./../../utils/addata.js')
+const addata = require('./../../utils/addata.js')//数据处理
+const baseConfig = require('./../../utils/config.js')//配置文件
 let preventShake = 0; //防止快速点击
 Page({
   data: {
     myquestionlist:[],//我的问题列表
     answer:null,//回复问题
-    questionid:1//回复的id
+    questionid:null//回复的id
   },
+
+
   onLoad: function(e) {
   
   },
+
+
   onShow: function() {
-   
+    this.usergroup()//用户问题列表
   },
 
-   //回复问题
-   replyquestion:function(type){
+  //回复问题
+  replyquestion:function(){
     var that = this;
     request({
       service: 'miniapp.php/question/replyquestion',
@@ -35,9 +40,6 @@ Page({
     })
 
   },
-
-
-
 
   //用户问题列表
   usergroup:function(){
@@ -57,11 +59,10 @@ Page({
           })
         }
       })
-    },
+  },
 
-
-    //观看激励视频
-    videoad: function() {
+  //观看激励视频
+  videoad: function() {
       var that = this;
       // 在页面中定义激励视频广告
       let videoAd = null
@@ -101,9 +102,9 @@ Page({
         })
       }
   
-    },
+  },
 
-    
+  //微信toast提示
   wxshowToast: function(title) {
     wx.showToast({
       title: title,

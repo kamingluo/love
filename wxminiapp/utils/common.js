@@ -92,7 +92,6 @@ function clickgdtadstatistics(e) {
 }
 
 //广告加载成功失败统计
-
 function adloadstatistics(e){
   let data = e;
   let user_id = wx.getStorageSync('userdata').id || 0;
@@ -108,6 +107,23 @@ function adloadstatistics(e){
 }
 
 
+//收集推送
+function collectmsg(temmsg_id){
+  let openid = wx.getStorageSync('userdata').openid || 0;
+  request({
+    service: 'sendmsg/collectmsg',
+    data:{
+      temmsg_id:temmsg_id,
+      openid:openid
+    },
+    success: res => {
+      console.log("推送记录成功", res)
+    }
+  })
+
+}
+
+
 
 
 
@@ -116,5 +132,6 @@ module.exports = {
   authorized:authorized,
   insidejump: insidejump,
   clickgdtadstatistics: clickgdtadstatistics,
-  adloadstatistics: adloadstatistics
+  adloadstatistics: adloadstatistics,
+  collectmsg:collectmsg
 }

@@ -47,8 +47,15 @@ function openid($wxcode){
 //提问待解答提醒
 function questions($openid){
     $senopenid=$openid;//用户openid
-    $access_token=wxtoken();//拿到token
     $temid = 'c6g3UgZ75NNEmb7A97wfUY9hUpL9-8UkovWrZib__0o';
+    $temid_data =db('temmsg')->where('openid',$openid)->where('temmsg_id',$temid)->find();//查询用户信息的推送id
+    if($temid_data==null){
+        return "用户没有推送id，不发送推送";
+    }
+    //删除用户的推送id
+    $cleardata=db('temmsg')-> where('id',$$temid_data['id'])->delete();
+
+    $access_token=wxtoken();//拿到token
     $page = 'pages/index/index';//路径
     $url = 'https://api.weixin.qq.com/cgi-bin/message/subscribe/send?access_token='.$access_token;
     //$explan="群:".$crowd_name."有新消息;";
@@ -74,9 +81,9 @@ function questions($openid){
       );
   $res = postCurl($url,$data,'json');
   if($res){
-     return "发送成功";
+     return "推送发送成功";
   }else{
-      return "发送失败";
+      return "推送发送失败";
   }
 
 }
@@ -86,8 +93,16 @@ function questions($openid){
 //问题被回复通知
 function reply($openid){
     $senopenid=$openid;//用户openid
-    $access_token=wxtoken();//拿到token
     $temid = 'lgKPuU_5nhhwESBve42PiBJrgYEoUbb83Y8K7rU9oSk';
+
+    $temid_data =db('temmsg')->where('openid',$openid)->where('temmsg_id',$temid)->find();//查询用户信息的推送id
+    if($temid_data==null){
+        return "用户没有推送id，不发送推送";
+    }
+    //删除用户的推送id
+    $cleardata=db('temmsg')-> where('id',$$temid_data['id'])->delete();
+
+    $access_token=wxtoken();//拿到token
     $page = 'pages/index/index';//路径
     $url = 'https://api.weixin.qq.com/cgi-bin/message/subscribe/send?access_token='.$access_token;
     $time =date('Y-m-d H:i:s',time());//获取当前时间
@@ -112,13 +127,13 @@ function reply($openid){
         )
         )
       );
-  $res = postCurl($url,$data,'json');
-  if($res){
-     return "发送成功";
-  }else{
-      return "发送失败";
-  }
+     $res = postCurl($url,$data,'json');
+    if($res){
 
+        return "推送发送成功";
+    }else{
+    return "推送发送失败";
+    }
 }
 
 
