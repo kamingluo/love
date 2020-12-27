@@ -1,127 +1,167 @@
-<cu-custom bgColor="bg-yellow">
-  <view slot="content">
-    <!-- <text class="title">爱会消失吗？</text> -->
+<view class="top">
+  <view class="centered">
+    <view class='userAvatar'>
+      <open-data class='userAvatarurl' type="userAvatarUrl"></open-data>
+    </view>
   </view>
-</cu-custom>
 
-
-<view class="centered">
-  <view class='userAvatar'>
-    <open-data class='userAvatarurl' type="userAvatarUrl"></open-data>
+  <view class="tips centered">
+    <view>
+      <text>你可以问我任何问题</text>
+    </view>
   </view>
 </view>
 
-<view class="centered">
-  <view class="tips">
-    <text>你可以问我任何问题</text>
-  </view>
+<view class="chat-view">
+  <scroll-view class="cu-chat" scroll-y="true" style="height: 1200rpx;">
+    <view>
+      <view class="cu-item">
+        <view class="cu-avatar radius" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big143004.jpg);"></view>
+        <view class="main">
+          <view class="content shadow">
+            <text>喵喵喵！喵喵喵！</text>
+          </view>
+        </view>
+      </view>
+      <view class="cu-item self">
+        <view class="main">
+          <view class="content bg-green shadow">
+            <text>喵喵喵！喵喵喵！喵喵喵！喵喵！喵喵！！喵！喵喵喵！</text>
+          </view>
+        </view>
+        <view class="cu-avatar radius" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big107000.jpg);"></view>
+      </view>
+    </view>
+
+
+
+    <view>
+      <view class="cu-item">
+        <view class="cu-avatar radius" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big143004.jpg);"></view>
+        <view class="main">
+          <view class="content shadow">
+            <text>喵喵喵！喵喵喵！</text>
+          </view>
+        </view>
+      </view>
+      <view class="cu-item self">
+        <view class="main">
+          <view class="content bg-green shadow">
+            <text>喵喵喵！喵喵喵！喵喵喵！喵喵！喵喵！！喵！喵喵喵！</text>
+          </view>
+        </view>
+        <view class="cu-avatar radius" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big107000.jpg);"></view>
+      </view>
+    </view>
+
+
+
+    <view>
+      <view class="cu-item">
+        <view class="cu-avatar radius" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big143004.jpg);"></view>
+        <view class="main">
+          <view class="content shadow">
+            <text>喵喵喵！喵喵喵！</text>
+          </view>
+        </view>
+      </view>
+      <view class="cu-item self">
+        <view class="main">
+          <view class="content bg-green shadow">
+            <text>喵喵喵！喵喵喵！喵喵喵！喵喵！喵喵！！喵！喵喵喵！</text>
+          </view>
+        </view>
+        <view class="cu-avatar radius" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big107000.jpg);"></view>
+      </view>
+    </view>
+
+    <view>
+      <view class="cu-item">
+        <view class="cu-avatar radius" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big143004.jpg);"></view>
+        <view class="main">
+          <view class="content shadow">
+            <text>喵喵喵！喵喵喵！</text>
+          </view>
+        </view>
+      </view>
+      <view class="cu-item self">
+        <view class="main">
+          <view class="content bg-green shadow">
+            <text>喵喵喵！喵喵喵！喵喵喵！喵喵！喵喵！！喵！喵喵喵！</text>
+          </view>
+        </view>
+        <view class="cu-avatar radius" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big107000.jpg);"></view>
+      </view>
+    </view>
+
+    <view>
+      <view class="cu-item">
+        <view class="cu-avatar radius" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big143004.jpg);"></view>
+        <view class="main">
+          <view class="content shadow">
+            <text>喵喵喵！喵喵喵！</text>
+          </view>
+        </view>
+      </view>
+      <view class="cu-item self">
+        <view class="main">
+          <view class="content bg-green shadow">
+            <text>喵喵喵！喵喵喵！喵喵喵！喵喵！喵喵！！喵！喵喵喵！</text>
+          </view>
+        </view>
+        <view class="cu-avatar radius" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big107000.jpg);"></view>
+      </view>
+    </view>
+
+    <view>
+      <view class="cu-item">
+        <view class="cu-avatar radius" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big143004.jpg);"></view>
+        <view class="main">
+          <view class="content shadow">
+            <text>喵喵喵！喵喵喵！</text>
+          </view>
+        </view>
+      </view>
+      <view class="cu-item self">
+        <view class="main">
+          <view class="content bg-green shadow">
+            <text>喵喵喵！喵喵喵！喵喵喵！喵喵！喵喵！！喵！喵喵喵！</text>
+          </view>
+        </view>
+        <view class="cu-avatar radius" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big107000.jpg);"></view>
+      </view>
+    </view>
+    <view class="zhanwei">
+    </view>
+  </scroll-view>
 </view>
-
-<view class="list">
-  <view class="cu-chat">
-    <view>
-      <view class="cu-item self">
-        <view class="centered">
-          <text>未回复</text> </view>
-        <view class="main">
-          <view class="content bg-green shadow">
-            <text>喵喵喵！喵喵喵！喵喵喵！喵喵！喵喵！！喵！喵喵喵！</text>
-          </view>
-        </view>
-        <view class="cu-avatar radius" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big107000.jpg);"></view>
-      </view>
-      <view class="cu-item">
-        <view class="cu-avatar radius" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big143004.jpg);"></view>
-        <view class="main">
-          <view class="content shadow">
-            <text>喵喵喵！喵喵喵！</text>
-          </view>
-        </view>
-      </view>
-    </view>
-
-    <view>
-      <view class="cu-item self">
-        <view class="centered">
-          <text>未回复</text> </view>
-        <view class="main">
-          <view class="content bg-green shadow">
-            <text>喵喵喵！喵喵喵！喵喵喵！喵喵！喵喵！！喵！喵喵喵！</text>
-          </view>
-        </view>
-        <view class="cu-avatar radius" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big107000.jpg);"></view>
-      </view>
-      <view class="cu-item">
-        <view class="cu-avatar radius" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big143004.jpg);"></view>
-        <view class="main">
-          <view class="content shadow">
-            <text>喵喵喵！喵喵喵！</text>
-          </view>
-        </view>
-      </view>
-    </view>
-
-    <view>
-      <view class="cu-item self">
-        <view class="centered">
-          <text>未回复</text> </view>
-        <view class="main">
-          <view class="content bg-green shadow">
-            <text>喵喵喵！喵喵喵！喵喵喵！喵喵！喵喵！！喵！喵喵喵！</text>
-          </view>
-        </view>
-        <view class="cu-avatar radius" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big107000.jpg);"></view>
-      </view>
-      <view class="cu-item">
-        <view class="cu-avatar radius" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big143004.jpg);"></view>
-        <view class="main">
-          <view class="content shadow">
-            <text>喵喵喵！喵喵喵！</text>
-          </view>
-        </view>
-      </view>
-    </view>
-
-    <view>
-      <view class="cu-item self">
-        <view class="centered">
-          <text>未回复</text> </view>
-        <view class="main">
-          <view class="content bg-green shadow">
-            <text>喵喵喵！喵喵喵！喵喵喵！喵喵！喵喵！！喵！喵喵喵！</text>
-          </view>
-        </view>
-        <view class="cu-avatar radius" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big107000.jpg);"></view>
-      </view>
-      <view class="cu-item">
-        <view class="cu-avatar radius" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big143004.jpg);"></view>
-        <view class="main">
-          <view class="content shadow">
-            <text>喵喵喵！喵喵喵！</text>
-          </view>
-        </view>
-      </view>
-    </view>
-  </view>
-
-  <view style='margin-top: 20rpx;color:#aaaaaa' class='centered'>
-    <text>-------已经到底啦-------</text>
-  </view>
-
-</view>
-
-
-
-
-
-
-
-
-
-
-
 
 <view class='sumittask centered'>
   <button bindtap="pushgoods" class="bg-red round">向他提问</button>
   <button bindtap="sortgoods" class="bg-red round">我也要玩</button>
+</view>
+
+<!-- 兑换弹框 -->
+<view class='frame'>
+  <view>
+    <view  class='frame-background '>
+      <view class='frame-body'>
+      <view>
+      <textarea> 11231231234124</textarea>
+      </view>
+
+      <view>
+      <view>
+      <text>这是问题啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</text>
+      
+      </view>
+      
+      </view>
+        
+      </view>
+    </view>
+    <view class='centered  sendbutton '>
+      <button>立即发送</button>
+    </view>
+  </view>
 </view>

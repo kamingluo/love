@@ -1,7 +1,9 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/question/question"
+    "pages/question/question",
+    "pages/qrcode/qrcode"
+
   ],
   "window": {
     "backgroundTextStyle": "light",

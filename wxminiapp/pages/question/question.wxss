@@ -1,12 +1,21 @@
 page {
   background: #fbbd08;
 }
+.top{
+  position: fixed;
+   z-index: 888;
+  width: 100%;
+  top: 0;
+  height: 130rpx;
+  margin-top: 50rpx;
+  background-color: #fbbd08;
+
+}
 .title{
   color: white;
   font-size: 40rpx;
   font-weight: 600;
 }
-
 .userAvatar {
   display: flex;
   flex-direction: row;
@@ -14,50 +23,84 @@ page {
   align-items: center;
   color: #fff;
   margin-top: 10rpx;
+  background-color: #fbbd08;
+  height: 160rpx;
+  width: 100%;
 }
-
 .userAvatarurl {
   overflow: hidden;
   display: block;
-  width: 160rpx;
-  height: 160rpx;
+  width: 140rpx;
+  height: 140rpx;
   border-radius: 50%;
   border: 2px solid #fff;
   box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
 }
-
-
 .tips{
-  margin-top: 20rpx;
+  /* margin-top: 20rpx; */
   margin-bottom: 30rpx;
+  background-color: #fbbd08;
+  height: 90rpx;
+  width: 100%;
 }
 .tips text{
-  font-size: 45rpx;
-  font-weight: 600;
+  font-size: 40rpx;
+  font-weight: 700;
    color: #e54d42;
   
 }
-
-.list{
-  margin-bottom: 200rpx;
+.chat-view{
+  margin-top: 300rpx;
 }
-
 .cu-chat .cu-item {
 	display: flex;
-	padding: 30rpx 30rpx 0rpx;
+	padding: 15rpx 30rpx 0rpx;
 	position: relative;
   
 }
-
 .sumittask{
   z-index: 888;
   width: 100%;
   position: fixed;
   bottom: 0;
   height: 130rpx;
-  margin-top: 80rpx;
-   background-color: #fbbd08;
+  /* margin-top: 80rpx; */
+  background-color: #fbbd08;
+   /* background-color: red; */
 }
 .sumittask button{
   width: 280rpx;
+}
+.zhanwei{
+  height: 150rpx;
+  width: 100%;
+}
+
+.frame {
+  position: fixed;
+  top: 0;
+  z-index: 999;
+  width: 100%;
+  height: 100%;
+  background: rgba(20, 20, 20, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.frame-background {
+  background-color: #fff;
+  border-radius: 30rpx;
+  box-shadow: 1px 1px 1px 3px #d3d3d3;
+  width: 650rpx;
+  height: 700rpx;
+}
+
+.frame-body{
+   width: 550rpx;
+
+}
+
+.sendbutton{
+  margin-top: 80rpx;
 }
