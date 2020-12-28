@@ -1,21 +1,23 @@
 page {
   background: #fbbd08;
 }
-.top{
+
+.top {
   position: fixed;
-   z-index: 888;
+  z-index: 888;
   width: 100%;
   top: 0;
   height: 130rpx;
   margin-top: 50rpx;
   background-color: #fbbd08;
-
 }
-.title{
+
+.title {
   color: white;
   font-size: 40rpx;
   font-weight: 600;
 }
+
 .userAvatar {
   display: flex;
   flex-direction: row;
@@ -27,6 +29,7 @@ page {
   height: 160rpx;
   width: 100%;
 }
+
 .userAvatarurl {
   overflow: hidden;
   display: block;
@@ -36,29 +39,32 @@ page {
   border: 2px solid #fff;
   box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
 }
-.tips{
+
+.tips {
   /* margin-top: 20rpx; */
   margin-bottom: 30rpx;
   background-color: #fbbd08;
   height: 90rpx;
   width: 100%;
 }
-.tips text{
+
+.tips text {
   font-size: 40rpx;
   font-weight: 700;
-   color: #e54d42;
-  
+  color: #e54d42;
 }
-.chat-view{
+
+.chat-view {
   margin-top: 300rpx;
 }
+
 .cu-chat .cu-item {
-	display: flex;
-	padding: 15rpx 30rpx 0rpx;
-	position: relative;
-  
+  display: flex;
+  padding: 15rpx 30rpx 0rpx;
+  position: relative;
 }
-.sumittask{
+
+.sumittask {
   z-index: 888;
   width: 100%;
   position: fixed;
@@ -66,12 +72,14 @@ page {
   height: 130rpx;
   /* margin-top: 80rpx; */
   background-color: #fbbd08;
-   /* background-color: red; */
+  /* background-color: red; */
 }
-.sumittask button{
+
+.sumittask button {
   width: 280rpx;
 }
-.zhanwei{
+
+.zhanwei {
   height: 150rpx;
   width: 100%;
 }
@@ -90,17 +98,44 @@ page {
 
 .frame-background {
   background-color: #fff;
-  border-radius: 30rpx;
+  border-radius: 10rpx;
   box-shadow: 1px 1px 1px 3px #d3d3d3;
   width: 650rpx;
-  height: 700rpx;
+  height: 800rpx;
 }
 
-.frame-body{
-   width: 550rpx;
-
+.frame-body {
+  width: 100%;
 }
 
-.sendbutton{
+.sendbutton {
   margin-top: 80rpx;
+}
+
+.textarea-body {
+  width: 100%;
+  height: 150rpx;
+  background-color:#f37b1d;
+  border-radius: 10rpx;
+}
+.textarea-body textarea{
+  width: 98%;
+  height: 140rpx;
+  background-color:white;
+  font-size: 30rpx;
+  padding: 10rpx 10rpx 10rpx 10rpx;
+}
+
+.questionlist-body{
+  margin-top: 10rpx;
+  width: 100%;
+  height: 620rpx;
+
+}
+.questionlist{
+  width: 96%;
+  height: 620rpx;
+}
+.questions{
+  margin-top: 15rpx;
 }

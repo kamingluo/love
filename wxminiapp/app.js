@@ -8,10 +8,10 @@ App({
   onLaunch: function (e) {
     console.log("onLaunch打印信息", e)
     //this.autoUpdate()//检查更新
-    this.getUserInfo(e)//用户注册
+    //this.getUserInfo(e)//用户注册
     //this.scene(e)//传入入口值判断
     // 获取系统状态栏信息
-    this.seenum()//用户可以查看匿名次数
+   // this.seenum()//用户可以查看匿名次数
     wx.getSystemInfo({
       success: e => {
         this.globalData.StatusBar = e.statusBarHeight;

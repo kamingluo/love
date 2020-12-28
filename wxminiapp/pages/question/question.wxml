@@ -135,23 +135,30 @@
     我也要玩
   </button>
 </view>
-<!-- 兑换弹框 -->
-<view class='frame'>
+<!-- 提问弹框 -->
+<view class='frame' wx:if="{{questionmodel}}">
   <view>
     <view class='frame-background '>
       <view class='frame-body'>
-        <view>
-          <textarea maxlength="35" bindinput="inputquestion">这是用户输入问题的地方啊</textarea>
+        <view class="textarea-body centered ">
+          <textarea maxlength="50" bindinput="inputquestion" value="{{question}}" bindconfirm="replyquestionmsg" placeholder="请选择或者输入你的问题，要真诚走心哦~"> </textarea>
         </view>
-        <view>
-          <view>
-            <text>这是问题啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</text>
+        <view class="questionlist-body centered">
+          <view class="questionlist">
+            <scroll-view class="cu-chat" scroll-y="true" style="height: 600rpx;">
+              <view wx:for="1000000000000000" wx:key="item">
+                <view class="questions">
+                  <text>这是问题啊这是问题啊这是问题啊这是问题啊这是问题啊</text>
+                </view>
+              </view>
+            </scroll-view>
           </view>
         </view>
+
       </view>
     </view>
     <view class='centered  sendbutton '>
-      <button>立即发送</button>
+      <button class="cu-btn bg-orange  lg shadow">立即发送</button>
     </view>
   </view>
 </view>

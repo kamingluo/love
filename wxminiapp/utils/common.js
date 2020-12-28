@@ -11,7 +11,7 @@ function register(e) {
     success: res => {
       data.code = res.code
       request({
-        service: 'user/register',
+        service: 'miniapp.php/user/register',
         data: data,
         success: res => {
           wx.setStorageSync('userdata', res.userdata)
@@ -33,7 +33,7 @@ function authorized(e) {
     success: res => {
       data.code = res.code
       request({
-        service: 'user/authorized',
+        service: 'miniapp.php/user/authorized',
         data: data,
         success: res => {
           wx.setStorageSync('userdata', res.userdata)
@@ -111,7 +111,7 @@ function adloadstatistics(e){
 function collectmsg(temmsg_id){
   let openid = wx.getStorageSync('userdata').openid || 0;
   request({
-    service: 'sendmsg/collectmsg',
+    service: 'miniapp.php/sendmsg/collectmsg',
     data:{
       temmsg_id:temmsg_id,
       openid:openid

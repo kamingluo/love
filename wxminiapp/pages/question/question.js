@@ -12,6 +12,7 @@ Page({
     answeruserdata: {},//分享者用户信息
     shareuserquestion: [],//被分享用户进来，查看已经问分享者的问题
     question: null,//提问的问题
+    questionmodel:false,
     ifauthorized: false//用户是否有授权
   },
   onLoad: function (e) {
@@ -113,6 +114,7 @@ Page({
 
   //发起问题之前先授权回复的推送
   replyquestionmsg: function() {
+    return;
     const nowTime = Date.now();
     if (nowTime - preventShake < 2000) {
       return
