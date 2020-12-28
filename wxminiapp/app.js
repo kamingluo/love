@@ -8,7 +8,7 @@ App({
   onLaunch: function (e) {
     console.log("onLaunch打印信息", e)
     //this.autoUpdate()//检查更新
-    //common.register(e) //用户注册
+    this.getUserInfo(e)//用户注册
     //this.scene(e)//传入入口值判断
     // 获取系统状态栏信息
     this.seenum()//用户可以查看匿名次数
@@ -18,6 +18,35 @@ App({
         let custom = wx.getMenuButtonBoundingClientRect();
         this.globalData.Custom = custom;
         this.globalData.CustomBar = custom.bottom + custom.top - e.statusBarHeight;
+      }
+    })
+  },
+
+
+
+
+  getUserInfo: function (e) {
+    let that = this;
+    var data = {
+      channel: e.query.channel || 0,
+      scene :e.scene,
+    }
+    wx.getSetting({
+      success(res) {
+        if (res.authSetting['scope.userInfo']) {
+          // 已经授权，可以直接调用 getUserInfo 获取头像昵称
+          wx.getUserInfo({
+            success(res) {
+              let userdata = Object.assign(data, res.userInfo);
+              common.authorized(userdata) //用户注册已经授权
+            },
+            fail(res) {
+              common.register(data) //用户注册已经授权但是未获取到信息
+            }
+          })
+        } else {
+          common.register(data) //用户注册未授权
+        }
       }
     })
   },

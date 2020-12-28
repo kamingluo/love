@@ -117,7 +117,7 @@ function collectmsg(temmsg_id){
       openid:openid
     },
     success: res => {
-      console.log("推送记录成功", res)
+      console.log("收集推送id成功", res)
     }
   })
 

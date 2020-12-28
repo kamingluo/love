@@ -12,13 +12,14 @@ class Currency
   public function getqrcode(Request $request)
     {
       $userid=$request->param("userid");
-      $channel=$request->param("channel");
+      //$channel=$request->param("channel");
+      $channel=1000;//二维码渠道
       if (is_file('./qrcode/'.$userid.'.png')){
         return ['state'   => '200','message'  => "二维码已经存在" ,'type' => 'success'] ;
       }else{
         $access_token=wxtoken();//拿到token
         $url = "https://api.weixin.qq.com/wxa/getwxacode?access_token=$access_token";//生成二维码接口地址
-        $data = json_encode(array("path"=>"pages/index/index?master_id=$userid&channel=$channel","width"=> 150));
+        $data = json_encode(array("path"=>"pages/question/question?answer_userid=$userid&channel=$channel","width"=> 280));
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_HEADER, 'image/gif');

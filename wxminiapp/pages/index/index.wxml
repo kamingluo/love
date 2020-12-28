@@ -3,26 +3,27 @@
     <text class="title">爱会消失吗？</text>
   </view>
 </cu-custom> -->
-
 <view class="top">
   <view class="centered">
     <view class='userAvatar'>
       <open-data class='userAvatarurl' type="userAvatarUrl"></open-data>
     </view>
   </view>
-
   <view class="tips centered">
     <view>
       <text>朋友问我的问题</text>
     </view>
   </view>
 </view>
-
 <view class="chat-view">
   <scroll-view class="cu-chat" scroll-y="true" style="height: 1200rpx;">
     <view>
       <view class="cu-item">
-        <view class="cu-avatar radius" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big143004.jpg);">  <view class="see"> <text>点击查看\n匿名者</text></view></view>
+        <view class="cu-avatar radius" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big143004.jpg);">
+          <view class="see">
+            <text>点击查看\n匿名者</text>
+          </view>
+        </view>
         <view class="main">
           <view class="content shadow">
             <text>喵喵喵！喵喵喵！</text>
@@ -38,9 +39,6 @@
         <view class="cu-avatar radius" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big107000.jpg);"></view>
       </view>
     </view>
-
-
-
     <view>
       <view class="cu-item">
         <view class="cu-avatar radius" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big143004.jpg);"></view>
@@ -59,9 +57,6 @@
         <view class="cu-avatar radius" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big107000.jpg);"></view>
       </view>
     </view>
-
-
-
     <view>
       <view class="cu-item">
         <view class="cu-avatar radius" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big143004.jpg);"></view>
@@ -80,7 +75,6 @@
         <view class="cu-avatar radius" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big107000.jpg);"></view>
       </view>
     </view>
-
     <view>
       <view class="cu-item">
         <view class="cu-avatar radius" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big143004.jpg);"></view>
@@ -99,7 +93,6 @@
         <view class="cu-avatar radius" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big107000.jpg);"></view>
       </view>
     </view>
-
     <view>
       <view class="cu-item">
         <view class="cu-avatar radius" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big143004.jpg);"></view>
@@ -118,7 +111,6 @@
         <view class="cu-avatar radius" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big107000.jpg);"></view>
       </view>
     </view>
-
     <view>
       <view class="cu-item">
         <view class="cu-avatar radius" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big143004.jpg);"></view>
@@ -137,19 +129,32 @@
         <view class="cu-avatar radius" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big107000.jpg);"></view>
       </view>
     </view>
-
-
-    <view class="zhanwei">
-
-    </view>
-
-
+    <view class="zhanwei"></view>
   </scroll-view>
 </view>
-
-
-
 <view class='sumittask centered'>
-  <button bindtap="pushgoods" class="bg-red round">获取次数(2)</button>
-  <button bindtap="sortgoods" class="bg-red round">再玩一次</button>
+  <button bindtap="pushgoods" class="bg-red round" bindtap='videoad'>获取次数({{seenum}})</button>
+  <button bindtap="sortgoods" class="bg-red round" wx:if="{{ifauthorized}}" bindtap='qrcode'>
+    再玩一次
+  </button>
+  <button bindtap="sortgoods" class="bg-red round" wx:else open-type="getUserInfo" bindgetuserinfo="getUserInfo">
+    再玩一次
+  </button>
+</view>
+<view class="cu-modal show" wx:if="{{deletemodel}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">删除问题</view>
+      <view class="action" bindtap="hideModal">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="padding-xl">确定要这个问题吗？</view>
+    <view class="cu-bar bg-white justify-end">
+      <view class="action">
+        <button class="cu-btn line-green text-green" bindtap="hideModal">取消</button>
+        <button class="cu-btn bg-green margin-left" bindtap="delquestion">确定</button>
+      </view>
+    </view>
+  </view>
 </view>

@@ -23,9 +23,9 @@
 <view  class='tips'  wx:if="{{display}}" >
   <view class='went'  >
     <view>
-      <text>1.邀请的新用户即将成为你的好友</text> </view>
+      <text>1.生成二维码发送给好友</text> </view>
     <view>
-      <text>2.好友每次收益送你额外20%的奖励</text> </view>
+      <text>2.好友扫码即可马上向你提问</text> </view>
     <view>
       <text></text> </view>
   </view>

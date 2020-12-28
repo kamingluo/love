@@ -15,6 +15,10 @@ class Question
         $time =date('Y-m-d H:i:s',time());//获取当前时间
         $dbdata = ['id'=>'','question_userid' =>$question_userid,'answer_userid' => $answer_userid,'question' => $question,'answer' => null,'status' =>0,'anonymous' => 0,'create_time' =>$time];
         $questionId= db('question_answer')->insertGetId($dbdata);//返回自增ID
+        //推送消息给回答者
+        $openid=db('user')->where('id',$answer_userid)->value('openid');//查询回答者的openid
+        $msgidresult=questions($openid);
+
         $state=['state'   => '200','message'  => "提问成功"];
         $resdata=array_merge($state,array('questionId'=>$questionId));
         return $resdata;
@@ -26,6 +30,12 @@ class Question
         $answer =$request->param("answer");//回答的内容
         $questionid =$request->param("questionid");//问题id
         $dbreturn= db('question_answer')->where('id',$questionid)->update(['answer' => $answer,'status' => 1]);
+
+        //推送消息给问问题的人
+        $question_userid=db('question_answer')->where('id',$questionid)->value('question_userid');//查询提问者的用户id
+        $openid=db('user')->where('id',$question_userid)->value('openid');//查询提问者的openid
+        $msgidresult=reply($openid);
+
         $state=['state'   => '200','message'  => "回复成功"];
     	return  $state;
     }
@@ -96,7 +106,7 @@ class Question
          $questionid =$request->param("questionid");//问题id
          $openid=$request->param("openid");//用户openid
          $dbreturn= db('question_answer')->where('id',$questionid)->update(['anonymous' =>1]);
-         $reduce= db('see_number')->where('openid',$openid)->setDec('number',1);
+         //$reduce= db('see_number')->where('openid',$openid)->setDec('number',1);//已经在前端请求扣除了
          $state=['state'   => '200','message'  => "操作不匿名成功"];
          return  $state;
      }

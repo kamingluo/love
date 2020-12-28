@@ -2,6 +2,7 @@ const app = getApp()
 const {
   request
 } = require('./../../utils/request.js');
+const baseConfig = require('./../../utils/config.js')
 
 
 Page({
@@ -46,10 +47,9 @@ Page({
       success: res => {
         console.log('生成二维码成功', res);
         wx.hideLoading()
-        // https://littlefun.gzywudao.top/php/public/qrcode/1000.png
+        let host=baseConfig.host;
         this.setData({
-          imgurl: 'https://littlefun.gzywudao.top/php/public/qrcode/' + userid + '.png',
-
+          imgurl: host +'/qrcode/' + userid + '.png',
         })
       },
     })
@@ -102,10 +102,4 @@ Page({
     //console.log("打开设置")
     wx.openSetting()
   },
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })
