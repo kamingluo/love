@@ -33,7 +33,8 @@ class Question
 
         //推送消息给问问题的人
         $question_userid=db('question_answer')->where('id',$questionid)->value('question_userid');//查询提问者的用户id
-        $openid=db('user')->where('id',$question_userid)->value('openid');//查询提问者的openid
+        $userdata=db('user')->where('id',$question_userid)->find('openid');//查询提问者的信息
+        $openid=$userdata['openid'];
         $msgidresult=reply($openid);
 
         $state=['state'   => '200','message'  => "回复成功"];

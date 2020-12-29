@@ -53,7 +53,7 @@ function questions($openid){
         return "用户没有推送id，不发送推送";
     }
     //删除用户的推送id
-    $cleardata=db('temmsg')-> where('id',$$temid_data['id'])->delete();
+    $cleardata=db('temmsg')-> where('id',$temid_data['id'])->delete();
 
     $access_token=wxtoken();//拿到token
     $page = 'pages/index/index';//路径
@@ -100,7 +100,7 @@ function reply($openid){
         return "用户没有推送id，不发送推送";
     }
     //删除用户的推送id
-    $cleardata=db('temmsg')-> where('id',$$temid_data['id'])->delete();
+    $cleardata=db('temmsg')-> where('id',$temid_data['id'])->delete();
 
     $access_token=wxtoken();//拿到token
     $page = 'pages/index/index';//路径
