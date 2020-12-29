@@ -33,7 +33,7 @@ class Question
 
         //推送消息给问问题的人
         $question_userid=db('question_answer')->where('id',$questionid)->value('question_userid');//查询提问者的用户id
-        $userdata=db('user')->where('id',$question_userid)->find('openid');//查询提问者的信息
+        $userdata=db('user')->where('id',$question_userid)->find('openid');//查询提问者的信息、、
         $openid=$userdata['openid'];
         $msgidresult=reply($openid);
 
