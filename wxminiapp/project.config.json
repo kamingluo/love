@@ -60,7 +60,7 @@
 					"id": 0,
 					"name": "pages/question/question",
 					"pathName": "pages/question/question",
-					"query": "",
+					"query": "answer_userid=29360",
 					"scene": null
 				}
 			]

@@ -108,12 +108,12 @@ Page({
   },
   //回复问题
   replyquestion: function () {
+    var that = this;
     let answer = that.data.answer;
     if (answer == null) {
       this.wxshowToast("回复内容不能为空")
       return;
     }
-    var that = this;
     request({
       service: 'miniapp.php/question/replyquestion',
       data: {
@@ -144,7 +144,7 @@ Page({
           success: res => {
             that.setData({
               myquestionlist: res.myquestionlist,
-              deletemodel: false
+              deletemodel: false,
             })
           },
         })

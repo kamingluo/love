@@ -1,6 +1,6 @@
 module.exports = {
-  host: 'http://127.0.0.1/myproject/love/php/public/', //本地请求域名
-  //host: 'https://love.gzywudao.top/',//正式请求域名和图片地址
+  //host: 'http://127.0.0.1/myproject/love/php/public/', //本地请求域名
+  host: 'https://love.gzywudao.top/',//正式请求域名和图片地址
   cversion: 1, //版本号
   appid: 'wxc335c3cf09a7a39c', //小程序appid
   appname: "爱,会消失吗？", //小程序名称

@@ -16,13 +16,14 @@ Page({
     ifauthorized: false//用户是否有授权
   },
   onLoad: function (e) {
-    // let answer_userid=e.query.answer_userid;//分享者用户id
-    // this.setData({
-    //   answer_userid: answer_userid
-    // })
-    // this.shareuserquestion()//被分享用户进来，查看已经问分享者的问题
-    // this.questionlist()//预设问题列表
-    //this.getUserInfoif()//检查用户授权
+    console.log("分享进入",e)
+    let answer_userid=e.answer_userid;//分享者用户id
+    this.setData({
+      answer_userid: answer_userid
+    })
+    this.shareuserquestion()//被分享用户进来，查看已经问分享者的问题
+     this.questionlist()//预设问题列表
+    this.getUserInfoif()//检查用户授权
   },
 
   //判断用户有没有授权
@@ -90,6 +91,7 @@ Page({
             that.setData({
               shareuserquestion: res.questionlist,
               answeruserdata: res.answeruserdata,
+              questionmodel: false,
             })
           },
         })
@@ -97,6 +99,20 @@ Page({
     })
   },
 
+  //关闭弹框
+  hidemodel:function(){
+    this.setData({
+      questionmodel: false,
+    })
+  },
+
+//向他提问
+  putquestions:function(){
+    this.setData({
+      questionmodel: true,
+    })
+
+  },
   //用户输入问题
   inputquestion: function (e) {
     this.setData({
@@ -107,6 +123,7 @@ Page({
   //用户选择问题
   choicequestion: function (e) {
     let question = e.currentTarget.dataset.question
+    console.log("用户点击问题", question)
     this.setData({
       question: question,
     })
@@ -114,7 +131,6 @@ Page({
 
   //发起问题之前先授权回复的推送
   replyquestionmsg: function() {
-    return;
     const nowTime = Date.now();
     if (nowTime - preventShake < 2000) {
       return
@@ -150,6 +166,15 @@ Page({
         that.wxshowToast("发起问题成功")
         that.shareuserquestion()//刷新列表
       }
+    })
+
+  },
+  //微信toast提示
+  wxshowToast: function (title) {
+    wx.showToast({
+      title: title,
+      icon: 'none',
+      duration: 2000
     })
 
   },

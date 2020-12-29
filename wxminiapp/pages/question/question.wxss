@@ -64,6 +64,25 @@ page {
   position: relative;
 }
 
+.touxiang {
+	font-variant: small-caps;
+	margin: 0;
+	padding: 0;
+	display: inline-flex;
+	text-align: center;
+	justify-content: center;
+	color: var(--white);
+	white-space: nowrap;
+	position: relative;
+	width: 80rpx;
+	height: 80rpx;
+	background-size: cover;
+	background-position: center;
+	vertical-align: middle;
+	font-size: 1.5em;
+  border-radius: 6rpx;
+}
+
 .sumittask {
   z-index: 888;
   width: 100%;
@@ -138,4 +157,12 @@ page {
 }
 .questions{
   margin-top: 15rpx;
+}
+
+.insertadclose{
+  margin-top: 60rpx;
+}
+.insertadclose image{
+  width: 60rpx;
+  height: 60rpx;
 }

@@ -17,127 +17,47 @@
 </view>
 <view class="chat-view">
   <scroll-view class="cu-chat" scroll-y="true" style="height: 1200rpx;">
-    <view>
-      <view class="cu-item">
-        <view class="cu-avatar radius" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big143004.jpg);">
-          <view class="see">
-            <text>点击查看\n匿名者</text>
+
+    <view wx:for="{{myquestionlist}}" wx:key="item">
+      <view>
+        <view class="cu-item">
+          <view class="cu-avatar radius" style="background-image:url({{item.avatarUrl}});">
+            <!-- <view class="see">
+              <text>点击查看\n匿名者</text>
+            </view> -->
+          </view>
+          <view class="main">
+            <view class="content shadow">
+              <text>{{item.question}}</text>
+            </view>
+          </view>
+           <view class="centered" wx:if="{{item.status!=1}}" bindtap="ejectreply" data-questionid="{{item.id}}"><text>回复</text> </view>
+        </view>
+        <view class="cu-item self" wx:if="{{item.status==1}}">
+          <view class="main">
+            <view class="content bg-green shadow">
+              <text>{{item.answer}}</text>
+            </view>
+          </view>
+           <view class="touxiang radius">
+            <open-data class='touxiang radius' type="userAvatarUrl"></open-data>
           </view>
         </view>
-        <view class="main">
-          <view class="content shadow">
-            <text>喵喵喵！喵喵喵！</text>
-          </view>
-        </view>
-      </view>
-      <view class="cu-item self">
-        <view class="main">
-          <view class="content bg-green shadow">
-            <text>喵喵喵！喵喵喵！喵喵喵！喵喵！喵喵！！喵！喵喵喵！</text>
-          </view>
-        </view>
-        <view class="cu-avatar radius" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big107000.jpg);"></view>
       </view>
     </view>
-    <view>
-      <view class="cu-item">
-        <view class="cu-avatar radius" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big143004.jpg);"></view>
-        <view class="main">
-          <view class="content shadow">
-            <text>喵喵喵！喵喵喵！</text>
-          </view>
-        </view>
-      </view>
-      <view class="cu-item self">
-        <view class="main">
-          <view class="content bg-green shadow">
-            <text>喵喵喵！喵喵喵！喵喵喵！喵喵！喵喵！！喵！喵喵喵！</text>
-          </view>
-        </view>
-        <view class="cu-avatar radius" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big107000.jpg);"></view>
-      </view>
-    </view>
-    <view>
-      <view class="cu-item">
-        <view class="cu-avatar radius" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big143004.jpg);"></view>
-        <view class="main">
-          <view class="content shadow">
-            <text>喵喵喵！喵喵喵！</text>
-          </view>
-        </view>
-      </view>
-      <view class="cu-item self">
-        <view class="main">
-          <view class="content bg-green shadow">
-            <text>喵喵喵！喵喵喵！喵喵喵！喵喵！喵喵！！喵！喵喵喵！</text>
-          </view>
-        </view>
-        <view class="cu-avatar radius" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big107000.jpg);"></view>
-      </view>
-    </view>
-    <view>
-      <view class="cu-item">
-        <view class="cu-avatar radius" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big143004.jpg);"></view>
-        <view class="main">
-          <view class="content shadow">
-            <text>喵喵喵！喵喵喵！</text>
-          </view>
-        </view>
-      </view>
-      <view class="cu-item self">
-        <view class="main">
-          <view class="content bg-green shadow">
-            <text>喵喵喵！喵喵喵！喵喵喵！喵喵！喵喵！！喵！喵喵喵！</text>
-          </view>
-        </view>
-        <view class="cu-avatar radius" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big107000.jpg);"></view>
-      </view>
-    </view>
-    <view>
-      <view class="cu-item">
-        <view class="cu-avatar radius" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big143004.jpg);"></view>
-        <view class="main">
-          <view class="content shadow">
-            <text>喵喵喵！喵喵喵！</text>
-          </view>
-        </view>
-      </view>
-      <view class="cu-item self">
-        <view class="main">
-          <view class="content bg-green shadow">
-            <text>喵喵喵！喵喵喵！喵喵喵！喵喵！喵喵！！喵！喵喵喵！</text>
-          </view>
-        </view>
-        <view class="cu-avatar radius" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big107000.jpg);"></view>
-      </view>
-    </view>
-    <view>
-      <view class="cu-item">
-        <view class="cu-avatar radius" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big143004.jpg);"></view>
-        <view class="main">
-          <view class="content shadow">
-            <text>喵喵喵！喵喵喵！</text>
-          </view>
-        </view>
-      </view>
-      <view class="cu-item self">
-        <view class="main">
-          <view class="content bg-green shadow">
-            <text>喵喵喵！喵喵喵！喵喵喵！喵喵！喵喵！！喵！喵喵喵！</text>
-          </view>
-        </view>
-        <view class="cu-avatar radius" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big107000.jpg);"></view>
-      </view>
-    </view>
+
+
     <view class="zhanwei"></view>
   </scroll-view>
 </view>
 <view class='sumittask centered'>
-  <button bindtap="pushgoods" class="bg-red round" bindtap='videoad'>获取次数({{seenum}})</button>
-  <button bindtap="sortgoods" class="bg-red round" wx:if="{{ifauthorized}}" bindtap='qrcode'>
+  <!-- <button class="bg-red round" bindtap='videoad'>获取次数({{seenum}})</button> -->
+  <button class="bg-red round" open-type="contact">联系客服</button>
+  
+  <button  class="bg-red round" wx:if="{{ifauthorized}}" bindtap='qrcode'>
     再玩一次
   </button>
-  <button bindtap="sortgoods" class="bg-red round" wx:else open-type="getUserInfo" bindgetuserinfo="getUserInfo">
+  <button  class="bg-red round" wx:else open-type="getUserInfo" bindgetuserinfo="getUserInfo">
     再玩一次
   </button>
 </view>
@@ -154,6 +74,31 @@
       <view class="action">
         <button class="cu-btn line-green text-green" bindtap="hideModal">取消</button>
         <button class="cu-btn bg-green margin-left" bindtap="delquestion">确定</button>
+      </view>
+    </view>
+  </view>
+</view>
+
+
+
+<view class="cu-modal {{replymodel?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">请输入回复内容</view>
+      <view class="action" bindtap="hideModal">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="padding-sm">
+      <view class="textarea-body centered ">
+          <textarea maxlength="50" bindinput="inputreply" value="{{answer}}" bindconfirm="replyquestionmsg" placeholder="请选择或者输入你的问题，要真诚走心哦~"> </textarea>
+        </view>
+    </view>
+    <view class="cu-bar bg-white justify-end">
+      <view class="action">
+        <button class="cu-btn line-green text-green" bindtap="hideModal">取消</button>
+        <button class="cu-btn bg-green margin-left" bindtap="replyquestionmsg">确定</button>
+
       </view>
     </view>
   </view>

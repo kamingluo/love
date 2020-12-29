@@ -91,3 +91,36 @@ page {
   height: 150rpx;
   width: 100%;
 }
+
+.touxiang {
+	font-variant: small-caps;
+	margin: 0;
+	padding: 0;
+	display: inline-flex;
+	text-align: center;
+	justify-content: center;
+	color: var(--white);
+	white-space: nowrap;
+	position: relative;
+	width: 80rpx;
+	height: 80rpx;
+	background-size: cover;
+	background-position: center;
+	vertical-align: middle;
+	font-size: 1.5em;
+  border-radius: 6rpx;
+}
+
+.textarea-body {
+  width: 100%;
+  height: 150rpx;
+  background-color:#f37b1d;
+  border-radius: 10rpx;
+}
+.textarea-body textarea{
+  width: 98%;
+  height: 140rpx;
+  background-color:white;
+  font-size: 30rpx;
+  padding: 10rpx 10rpx 10rpx 10rpx;
+}

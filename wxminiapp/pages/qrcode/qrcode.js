@@ -40,7 +40,7 @@ Page({
       return;
     }
     request({
-      service: 'currency/getqrcode',
+      service: 'miniapp.php/currency/getqrcode',
       data: {
         userid: userid,
       },

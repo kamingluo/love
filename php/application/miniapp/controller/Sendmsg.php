@@ -1,5 +1,5 @@
 <?php
-namespace app\miniapp\controller\temmsg;
+namespace app\miniapp\controller;
 use think\Db;
 use think\Request;
 use think\Config;
