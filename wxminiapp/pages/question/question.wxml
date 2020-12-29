@@ -1,7 +1,8 @@
 <view class="top">
   <view class="centered">
     <view class='userAvatar'>
-      <open-data class='userAvatarurl' type="userAvatarUrl"></open-data>
+      <!-- <open-data class='userAvatarurl' type="userAvatarUrl"></open-data> -->
+      <image src="{{answeruserdata.avatarUrl}}"></image>
     </view>
   </view>
   <view class="tips centered">

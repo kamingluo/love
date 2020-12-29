@@ -153,6 +153,11 @@ Page({
   //发起问题
   replyquestion: function () {
     var that = this;
+    var question = that.data.question;
+    if (question == null || question == "" || question==''){
+      that.wxshowToast("提问不能为空")
+      return;
+    }
     let question_userid = wx.getStorageSync('userdata').id || 0;
     request({
       service: 'miniapp.php/question/launchquestion',

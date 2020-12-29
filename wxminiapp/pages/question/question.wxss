@@ -39,6 +39,15 @@ page {
   border: 2px solid #fff;
   box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
 }
+.userAvatar image{
+   overflow: hidden;
+  display: block;
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+}
 
 .tips {
   /* margin-top: 20rpx; */
@@ -156,7 +165,7 @@ page {
   height: 620rpx;
 }
 .questions{
-  margin-top: 15rpx;
+  margin-top: 20rpx;
 }
 
 .insertadclose{
