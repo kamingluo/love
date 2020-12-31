@@ -52,7 +52,7 @@ class Question
         }
         else{
             $answer_userid=$dbdata["id"];
-            $sql = "select question_answer.*,user.nickName,user.avatarUrl from question_answer,user where question_answer.question_userid=user.id and question_answer.answer_userid='". $answer_userid."';" ;
+            $sql = "select question_answer.*,user.nickName,user.avatarUrl from question_answer,user where question_answer.question_userid=user.id and question_answer.answer_userid='". $answer_userid." ORDER BY question_answer.id DESC';" ;
             $myquestionlist = Db::query($sql); //拿到数据
 
             //$myquestionlist=db('question_answer')->where('answer_userid',$dbdata["id"])->order('id asc')->select();
@@ -79,7 +79,7 @@ class Question
             // $sql = "select question_answer.*,user.nickName,user.avatarUrl from question_answer,user where question_answer.question_userid=user.id and question_answer.answer_userid='". $answer_userid."';" ;
             // $myquestionlist = Db::query($sql); //拿到数据
 
-            $questionlist=db('question_answer')->where('answer_userid',$answer_userid)->where('question_userid',$dbdata["id"])->order('id asc')->select();
+            $questionlist=db('question_answer')->where('answer_userid',$answer_userid)->where('question_userid',$dbdata["id"])->order('id desc')->select();
         }
         $state=['state'   => '200','message'  => "被分享用户进来，查看已经问分享者的问题" ];
         $resdata=array_merge($state,array('questionlist'=>$questionlist),array('answeruserdata'=>$answer_userdata));

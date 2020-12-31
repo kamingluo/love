@@ -20,12 +20,14 @@
 </view>
 
 
-<view  class='tips'  wx:if="{{display}}" >
+<view  class='tips' >
   <view class='went'  >
     <view>
       <text>1.生成二维码发送给好友</text> </view>
     <view>
       <text>2.好友扫码即可马上向你提问</text> </view>
+      <view>
+      <text>3.或点击右上角直接分享小程序卡片给朋友</text> </view>
     <view>
       <text></text> </view>
   </view>

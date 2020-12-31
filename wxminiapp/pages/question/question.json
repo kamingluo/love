@@ -1,6 +1,7 @@
 {
   "usingComponents": {
     "cu-custom": "/colorui/components/cu-custom",
-    "gdtad": "/components/gdtAd/index"
+    "gdtad": "/components/gdtAd/index",
+    "defaultgraph": "/components/defaultGraph/index"
   }
 }

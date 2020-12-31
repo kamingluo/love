@@ -16,8 +16,12 @@
   </view>
 </view>
 <view class="chat-view">
-  <scroll-view class="cu-chat" scroll-y="true" style="height: 1200rpx;">
+  <!-- 默认图片组件 -->
+  <view wx:if="{{myquestionlist.length <= 0}}">
+    <defaultgraph tips="还没好友提问呢,点击下方按钮邀请好友提问吧"></defaultgraph>
+  </view>
 
+  <scroll-view class="cu-chat" scroll-y="true" style="height: 1200rpx;" wx:else>
     <view wx:for="{{myquestionlist}}" wx:key="item">
       <view>
         <view class="cu-item">
@@ -31,7 +35,9 @@
               <text>{{item.question}}</text>
             </view>
           </view>
-           <view class="centered" wx:if="{{item.status!=1}}" bindtap="ejectreply" data-questionid="{{item.id}}"><text>回复</text> </view>
+          <view class="centered" wx:if="{{item.status!=1}}" bindtap="ejectreply" data-questionid="{{item.id}}">
+            <text>回复</text>
+          </view>
         </view>
         <view class="cu-item self" wx:if="{{item.status==1}}">
           <view class="main">
@@ -39,25 +45,20 @@
               <text>{{item.answer}}</text>
             </view>
           </view>
-           <view class="touxiang radius">
+          <view class="touxiang radius">
             <open-data class='touxiang radius' type="userAvatarUrl"></open-data>
           </view>
         </view>
       </view>
     </view>
-
-
     <view class="zhanwei"></view>
   </scroll-view>
 </view>
 <view class='sumittask centered'>
   <!-- <button class="bg-red round" bindtap='videoad'>获取次数({{seenum}})</button> -->
   <button class="bg-red round" open-type="contact">联系客服</button>
-  
-  <button  class="bg-red round" wx:if="{{ifauthorized}}" bindtap='qrcode'>
-    再玩一次
-  </button>
-  <button  class="bg-red round" wx:else open-type="getUserInfo" bindgetuserinfo="getUserInfo">
+  <button class="bg-red round" wx:if="{{ifauthorized}}" bindtap='qrcode'>邀请好友</button>
+  <button class="bg-red round" wx:else open-type="getUserInfo" bindgetuserinfo="getUserInfo">
     再玩一次
   </button>
 </view>
@@ -78,9 +79,6 @@
     </view>
   </view>
 </view>
-
-
-
 <view class="cu-modal {{replymodel?'show':''}}">
   <view class="cu-dialog">
     <view class="cu-bar bg-white justify-end">
@@ -91,14 +89,13 @@
     </view>
     <view class="padding-sm">
       <view class="textarea-body centered ">
-          <textarea maxlength="50" bindinput="inputreply" value="{{answer}}" bindconfirm="replyquestionmsg" placeholder="请选择或者输入你的问题，要真诚走心哦~"> </textarea>
-        </view>
+        <textarea maxlength="50" bindinput="inputreply" value="{{answer}}" bindconfirm="replyquestionmsg" placeholder="请选择或者输入你的问题，要真诚走心哦~"></textarea>
+      </view>
     </view>
     <view class="cu-bar bg-white justify-end">
       <view class="action">
         <button class="cu-btn line-green text-green" bindtap="hideModal">取消</button>
         <button class="cu-btn bg-green margin-left" bindtap="replyquestionmsg">确定</button>
-
       </view>
     </view>
   </view>
